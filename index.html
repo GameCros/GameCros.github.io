@@ -9,7 +9,7 @@
 <title>Tic Tac Toe</title>
 <link rel="icon" href="png.png" type="image/x-icon">
 <style>
-    body {
+  body {
     background: linear-gradient(to bottom right, #ff7e5f, #feb47b);
     display: flex;
     justify-content: center;
@@ -113,6 +113,7 @@
   <button id="newGame" style="display: none;">New Game</button>
 </div>
 <div id="confetti"></div>
+<audio id="winnerSound" src="yeahhh.mp3"></audio>
 <script>
   const grid = document.getElementById('grid');
   const restartButton = document.getElementById('restart');
@@ -146,6 +147,8 @@
   }
 
   function endGame(winnerName) {
+const winnerSound = document.getElementById('winnerSound');
+  winnerSound.play();
     winnerPopup.textContent = `${winnerName} wins! 🎉`;
     winnerPopup.style.display = 'block';
     winnerPopup.style.animation = 'glow 1s infinite alternate';
