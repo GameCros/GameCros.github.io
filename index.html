@@ -18,6 +18,12 @@
     margin: 0;
     font-family: Arial, sans-serif;
   }
+a {
+	text-decoration:none;
+	color:red;
+	font-family: 'Playfair Display' , serif;
+	font-weight:900;
+}
   #container {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
@@ -108,12 +114,14 @@
 <div id="container">
   <div id="turn"></div>
   <div class="grid" id="grid"></div>
-  <button id="restart">Restart</button>
+  <button id="restart">Restart</button><br><br>
+<center><a href="https://gamecros.github.io/self.html">About The Devoloper</a></center>
   <div id="winnerPopup"></div>
   <button id="newGame" style="display: none;">New Game</button>
 </div>
 <div id="confetti"></div>
-<audio id="winnerSound" src="yeahhh.mp3"></audio>
+<audio id="winnerSound" src="https://gamecros.github.io/yeahhh.mp3" autoplay></audio>
+<audio id="tieSound" src="https://gamecros.github.io/wooooh.mp3"></audio>
 <script>
   const grid = document.getElementById('grid');
   const restartButton = document.getElementById('restart');
@@ -146,17 +154,17 @@
     return null;
   }
 
-  function endGame(winnerName) {
-const winnerSound = document.getElementById('winnerSound');
-  winnerSound.play();
-    winnerPopup.textContent = `${winnerName} wins! 🎉`;
-    winnerPopup.style.display = 'block';
-    winnerPopup.style.animation = 'glow 1s infinite alternate';
-    confettiEffect();
-    newGameButton.style.display = 'inline';
-    restartButton.style.display = 'none';
-    turnDisplay.style.display = 'none';
-  }
+function endGame(winnerName) {
+  const winnerSound = document.getElementById('winnerSound');
+  winnerSound.play(); // Add this line to play the sound
+  winnerPopup.textContent = `${winnerName} wins! 🎉`;
+  winnerPopup.style.display = 'block';
+  winnerPopup.style.animation = 'glow 1s infinite alternate';
+  confettiEffect();
+  newGameButton.style.display = 'inline';
+  restartButton.style.display = 'none';
+  turnDisplay.style.display = 'none';
+}
 
   function confettiEffect() {
     for (let i = 0; i < 100; i++) {
@@ -195,7 +203,9 @@ function restartGame() {
       if (winner === 'X' || winner === 'O') {
         endGame(winner);
       } else if (winner === 'tie') {
-        winnerPopup.textContent = 'It\'s a tie!';
+    const tieSound = document.getElementById('tieSound');
+    tieSound.play();
+        winnerPopup.textContent = 'It\'s a tie! 😐';
         winnerPopup.style.display = 'block';
         newGameButton.style.display = 'inline';
         restartButton.style.display = 'none';
